@@ -55,7 +55,7 @@ package:
 
 functions:
   receiver:
-    handler: bin/main
+    handler: bin/fan-letter-app-receiver
     events:
       - http:
           path: /receiver
