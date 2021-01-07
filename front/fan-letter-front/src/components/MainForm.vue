@@ -18,6 +18,7 @@
 import { required } from 'vee-validate/dist/rules';
 import { localize, extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import ja from 'vee-validate/dist/locale/ja.json';
+import axios from 'axios';
 
 extend('required', required);
 localize('ja', ja);
@@ -33,8 +34,30 @@ export default {
   }),
   methods: {
     submit() {
-      this.$refs.obs.validate().then((result) => {
-        console.log('submit', result);
+      this.$refs.obs.validate().then(() => {
+        const lambdaApi = 'https://4xwqbgj0ad.execute-api.ap-northeast-1.amazonaws.com/dev/receiver';
+
+        const postData = {
+          id: this.ID,
+          text: this.text,
+        };
+
+        console.log(postData);
+
+        const headers = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+
+        axios
+          .post(lambdaApi, postData, headers)
+          .then(() => {
+            console.log('成功');
+          })
+          .catch(() => {
+            console.log('失敗');
+          });
       });
     },
   },
