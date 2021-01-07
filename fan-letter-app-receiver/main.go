@@ -71,7 +71,13 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	jsonBytes := PutDynamoDB(request)
 	return events.APIGatewayProxyResponse{
-		Body:       string(jsonBytes),
+		Body: string(jsonBytes),
+		Headers: map[string]string{
+			"Content-Type":                 "text/html",
+			"Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "POST",
+		},
 		StatusCode: 200,
 	}, nil
 }
