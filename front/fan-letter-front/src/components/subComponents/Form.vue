@@ -54,11 +54,15 @@ export default {
           .post(lambdaApi, postData, headers)
           .then(() => {
             console.log('成功');
+            this.viewList();
           })
           .catch(() => {
             console.log('失敗');
           });
       });
+    },
+    viewList: function() {
+      this.$emit('viewList');
     },
   },
 };
