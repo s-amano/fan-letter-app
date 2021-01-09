@@ -19,6 +19,7 @@ const (
 type FanLetterRequest struct {
 	ID   string `json:"id"`
 	Text string `json:"text"`
+	From string `json:"from"`
 }
 
 // PutDynamoDB はDynamoDBへitemをputする関数です
@@ -34,8 +35,9 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 
 	id := fanletterReq.ID
 	text := fanletterReq.Text
+	from := fanletterReq.From
 
-	fmt.Printf("id %v, text %v\n", id, text)
+	fmt.Printf("id %v, text %v from %v\n", id, text, from)
 
 	fanletter := map[string]*dynamodb.AttributeValue{
 		"id": {
@@ -43,6 +45,9 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 		},
 		"text": {
 			S: aws.String(text),
+		},
+		"from": {
+			S: aws.String(from),
 		},
 	}
 
