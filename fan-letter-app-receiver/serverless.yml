@@ -118,25 +118,21 @@ resources:
     DynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
-        # キーの型を指定
+        # キーの型
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
           - AttributeName: text
             AttributeType: S
-        # キーの種類を指定（ハッシュorレンジキー）
+        # キーの種類（ハッシュorレンジキー）
         KeySchema:
           - AttributeName: id
             KeyType: HASH
           - AttributeName: text
             KeyType: RANGE
-        # プロビジョニングするキャパシティーユニットの設定
+        # プロビジョニングするキャパシティーユニット
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        # テーブル名の指定
+        # テーブル名
         TableName: fan-letter-app-table
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"

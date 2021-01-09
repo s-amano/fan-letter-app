@@ -17,6 +17,7 @@ import (
 type SurveyFanLetter struct {
 	ID   string `dynamodbav:"id" json:"id"`
 	Text string `dynamodbav:"text" json:"text"`
+	From string `dynamodbav:"from" json:"from"`
 }
 
 // Scan はDynamoDBから全件取得する関数です

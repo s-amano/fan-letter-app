@@ -8,6 +8,8 @@
       <v-list-item v-for="(fanletter, i) in fanletters" :key="i">
         <v-list-item-content>
           <v-list-item-title v-text="fanletter.text"></v-list-item-title>
+          <v-list-item-subtitle v-if="fanletter.from == ''" v-text="'匿名'">より</v-list-item-subtitle>
+          <v-list-item-subtitle v-else v-text="fanletter.from + 'より'">より</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <!-- </v-list-item-group> -->

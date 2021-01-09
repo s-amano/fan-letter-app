@@ -2,11 +2,27 @@
   <ValidationObserver ref="obs" v-slot="{ invalid }">
     <form>
       <ValidationProvider v-slot="{ errors, valid }" name="id" rules="required">
-        <v-text-field v-model="ID" :error-messages="errors" label="ID" required :success="valid"></v-text-field>
+        <v-text-field v-model="ID" :error-messages="errors" label="ID:123" required :success="valid"></v-text-field>
       </ValidationProvider>
 
-      <ValidationProvider v-slot="{ errors, valid }" name="テキスト" rules="required">
-        <v-text-field v-model="text" :error-messages="errors" label="テキスト" required :success="valid"></v-text-field>
+      <ValidationProvider v-slot="{ errors, valid }" name="手紙内容" rules="required">
+        <v-text-field
+          v-model="text"
+          :error-messages="errors"
+          label="手紙内容:いつもありがとう"
+          required
+          :success="valid"
+        ></v-text-field>
+      </ValidationProvider>
+
+      <ValidationProvider v-slot="{ errors, valid }" name="From" rules="required">
+        <v-text-field
+          v-model="from"
+          :error-messages="errors"
+          label="From:天野"
+          required
+          :success="valid"
+        ></v-text-field>
       </ValidationProvider>
 
       <v-btn class="mr-4" @click="submit" :disabled="invalid" color="success">送信</v-btn>
@@ -31,6 +47,7 @@ export default {
   data: () => ({
     ID: '',
     text: '',
+    from: '',
   }),
   methods: {
     submit() {
@@ -40,6 +57,7 @@ export default {
         const postData = {
           id: this.ID,
           text: this.text,
+          from: this.from,
         };
 
         console.log(postData);
