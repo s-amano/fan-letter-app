@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -20,6 +21,7 @@ type FanLetterRequest struct {
 	ID   string `json:"id"`
 	Text string `json:"text"`
 	From string `json:"from"`
+	Post string
 }
 
 // PutDynamoDB はDynamoDBへitemをputする関数です
@@ -27,6 +29,12 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 	reqBody := request.Body
 	jsonBytes := ([]byte)(reqBody)
 	fanletterReq := new(FanLetterRequest)
+
+	//日本時間に変換して現在時刻をセット
+	currentTime := time.Now()
+	jst := time.FixedZone("Asia/Tokyo", 9*60*60)
+	jstTime := currentTime.In(jst).Format("2006/01/02")
+	fanletterReq.Post = jstTime
 
 	// FanLetterRequest構造体に格納
 	if err := json.Unmarshal(jsonBytes, fanletterReq); err != nil {
@@ -36,8 +44,9 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 	id := fanletterReq.ID
 	text := fanletterReq.Text
 	from := fanletterReq.From
+	postAt := fanletterReq.Post
 
-	fmt.Printf("id %v, text %v from %v\n", id, text, from)
+	fmt.Printf("id %v, text %v, from %v, postAt %v\n", id, text, from, postAt)
 
 	fanletter := map[string]*dynamodb.AttributeValue{
 		"id": {
@@ -48,6 +57,9 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 		},
 		"from": {
 			S: aws.String(from),
+		},
+		"post_at": {
+			S: aws.String(postAt),
 		},
 	}
 

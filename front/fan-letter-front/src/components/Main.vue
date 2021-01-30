@@ -8,7 +8,7 @@
     </v-row>
     <v-row class="buttons">
       <v-col>
-        <v-btn class="mr-4" @click="viewForm">ファンレターを書く</v-btn>
+        <v-btn class="mr-4 mb-2" @click="viewForm">ファンレターを書く</v-btn>
         <v-btn class="mr-4" @click="viewList">ファンレターを見る</v-btn>
       </v-col>
     </v-row>
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Form from './subComponents/Form';
-import FanLetterList from './subComponents/FanLetterList';
+import Form from "./subComponents/Form";
+import FanLetterList from "./subComponents/FanLetterList";
 
 export default {
   components: {

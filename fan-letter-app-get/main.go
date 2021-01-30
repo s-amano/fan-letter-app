@@ -15,14 +15,15 @@ import (
 
 // SurveyFanLetter - ファンレター内容を表現する構造体です
 type SurveyFanLetter struct {
-	ID   string `dynamodbav:"id" json:"id"`
-	Text string `dynamodbav:"text" json:"text"`
-	From string `dynamodbav:"from" json:"from"`
+	ID     string `dynamodbav:"id" json:"id"`
+	Text   string `dynamodbav:"text" json:"text"`
+	From   string `dynamodbav:"from" json:"from"`
+	PostAt string `dynamodbav:"post_at" json:"post_at"`
 }
 
 // Scan はDynamoDBから全件取得する関数です
 func Scan() []SurveyFanLetter {
-	var fanLetters []SurveyFanLetter = []SurveyFanLetter{}
+	var fanLetters = []SurveyFanLetter{}
 	session, err := session.NewSession()
 	conn := dynamodb.New(session)
 	s := &dynamodb.ScanInput{
