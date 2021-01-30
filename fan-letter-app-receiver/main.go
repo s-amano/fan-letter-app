@@ -10,6 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+
+	"github.com/google/uuid"
 )
 
 const (
@@ -25,10 +27,19 @@ type FanLetterRequest struct {
 }
 
 // PutDynamoDB はDynamoDBへitemをputする関数です
-func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
+func PutDynamoDB(request events.APIGatewayProxyRequest) ([]byte, error) {
+	var randomId uuid.UUID
+	var err error
+	//ランダムなIDを生成
+	if randomId, err = uuid.NewRandom(); err != nil {
+		return nil, err
+	}
+
 	reqBody := request.Body
 	jsonBytes := ([]byte)(reqBody)
 	fanletterReq := new(FanLetterRequest)
+
+	fanletterReq.ID = randomId.String()
 
 	//日本時間に変換して現在時刻をセット
 	currentTime := time.Now()
@@ -82,11 +93,17 @@ func PutDynamoDB(request events.APIGatewayProxyRequest) []byte {
 		fmt.Println("[ERROR]", err)
 	}
 
-	return jsonBytes
+	return jsonBytes, nil
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	jsonBytes := PutDynamoDB(request)
+	jsonBytes, err := PutDynamoDB(request)
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			Body: "error!",
+			StatusCode: 400, // Bad Request
+		}, err
+	}
 	return events.APIGatewayProxyResponse{
 		Body: string(jsonBytes),
 		Headers: map[string]string{

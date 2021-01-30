@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90c1c557-6a0d-4957-b572-2899faee81c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fan-letter-app-get/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/fan-letter-app-get/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fan-letter-app-receiver/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/fan-letter-app-receiver/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/fan-letter-front/src/components/Main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/fan-letter-front/src/components/Main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/fan-letter-front/src/components/subComponents/FanLetterList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/fan-letter-front/src/components/subComponents/FanLetterList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/fan-letter-front/src/components/subComponents/Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front/fan-letter-front/src/components/subComponents/Form.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
