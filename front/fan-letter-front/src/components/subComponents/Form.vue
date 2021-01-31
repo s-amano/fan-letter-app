@@ -93,7 +93,7 @@ export default {
           });
       });
     },
-    viewList: function () {
+    viewList() {
       this.$emit("viewList");
     },
   },
